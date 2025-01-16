@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBeRaV2dPkfqmFXfX5KPC9Arvm5UiLT6Qk",
-  authDomain: "medicamp-f955a.firebaseapp.com",
-  projectId: "medicamp-f955a",
-  storageBucket: "medicamp-f955a.firebasestorage.app",
-  messagingSenderId: "1091730296431",
-  appId: "1:1091730296431:web:9bf5dd52b161c49b00079a"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId
 };
 
 // Initialize Firebase

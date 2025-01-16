@@ -3,6 +3,11 @@ import MainLayOut from "../Layouts/MainLayOut";
 import Home from "../Pages/Home/Home";
 import LogIn from "../UserAuth/LogIn";
 import SignUp from "../UserAuth/SignUp";
+import DashBoard from "../Dashboard/DashBoard/DashBoard";
+import AllUser from "../Dashboard/DashBoard/AllUser";
+import AdminRoute from "./AdminRoute";
+import AddCamp from "../Dashboard/DashBoard/AddCamp";
+import AllCamps from "../Pages/AllCamps/AllCamps";
 
 
 const router = createBrowserRouter([
@@ -16,6 +21,10 @@ const router = createBrowserRouter([
         element: <Home></Home>
       },
       {
+        path:'available-camps',
+        element: <AllCamps></AllCamps>
+      },
+      {
         path:'login',
         element: <LogIn></LogIn>
       },
@@ -24,7 +33,25 @@ const router = createBrowserRouter([
         element: <SignUp></SignUp>
       },
     ]
+  },
+
+  //dashboard
+  {
+    path: 'dashboard',
+    element: <DashBoard></DashBoard>,
+    children:[
+      {
+        path: 'allUser',
+        element: <AdminRoute><AllUser></AllUser></AdminRoute>    
+      },
+      {
+        path: 'addCamp',
+        element: <AdminRoute><AddCamp></AddCamp></AdminRoute>    
+      },
+    ]
   }
+
+
 ])
 
 export default router;

@@ -2,20 +2,20 @@ import React, { useContext, useState } from "react";
 import { FiMenu, FiX, FiHome, FiLogOut } from "react-icons/fi";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-
 import Swal from "sweetalert2";
 import userImg from "../../src/assets/icons/icons8-user-96.png";
 import { FaShoppingCart } from "react-icons/fa";
 import { AuthContext } from "../Providers/AuthProvider";
+import useAdmin from "../Hooks/useAdmin";
 // import useCart from "../../../Hooks/useCart";
-// import useAdmin from "../../../Hooks/useAdmin";
+
 
 const Navbar = () => {
   const { logOut, user, loading } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   // const [cart] = useCart();
-  // const [isAdmin] = useAdmin();
+  const [isAdmin] = useAdmin();
 
   const handleSignOut = () => {
     logOut()
@@ -71,7 +71,7 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      {/* 
+{/*       
       {
         user && isAdmin && <li><Link to='/dashboard/adminHome'>Dashboard</Link></li>
       }
@@ -79,22 +79,7 @@ const Navbar = () => {
         user && !isAdmin && <li><Link to='/dashboard/userHome'>Dashboard</Link></li>
       } */}
 
-      <li>
-        <NavLink
-          to="/dashboard/cart"
-          className={({ isActive }) =>
-            `flex items-center gap-2 hover:text-gray-300 ${
-              isActive ? "text-blue-500" : "text-white"
-            }`
-          }
-        >
-          <button className="flex items-center mt-1">
-            <FaShoppingCart />
-            <div className="badge badge-secondary">0</div>
-            {/* <div className="badge badge-secondary">+{cart.length}</div> */}
-          </button>
-        </NavLink>
-      </li>
+     
     </>
   );
 
@@ -140,7 +125,7 @@ const Navbar = () => {
                   <button
                     className="bg-blue-400 block text-center"
                   >
-                    <Link to='/'>Dashboard</Link>
+                    <Link to='/dashboard'>Dashboard</Link>
                   </button>
                 </li>
               </ul>
@@ -153,7 +138,7 @@ const Navbar = () => {
                 className=" w-10 h-10 rounded-full"
               />
               <Link className="btn btn-outline mr-2" to="/login">
-                Log in
+                Join Us
               </Link>
             </div>
           )}
@@ -173,7 +158,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="fixed top-0 right-0 h-full w-1/3 md:w-1/2 bg-black bg-opacity-45 backdrop-blur-md text-white shadow-lg z-50 lg:hidden"
           >
-            <div className="flex justify-between items-center p-4 border-b border-gray-700">
+            <div className="flex justify-between items-center p-4 border-b">
               <span className="text-xl font-bold"></span>
               <button onClick={toggleMenu} className="text-white">
                 <FiX size={24} />
@@ -200,7 +185,7 @@ const Navbar = () => {
                       }`
                     }
                   >
-                    <FiLogOut /> Login
+                    <FiLogOut /> Join Us
                   </NavLink>
                 </li>
               )}
