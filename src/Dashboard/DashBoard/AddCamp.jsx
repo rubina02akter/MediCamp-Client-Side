@@ -41,7 +41,7 @@ const AddCamp = () => {
       console.log(response.data);
 
       if (response.data.insertedId) {
-        reset();
+        // reset();
         Swal.fire({
           position: "top-end",
           icon: "success",
