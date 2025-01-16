@@ -16,16 +16,16 @@ const Dashboard = () => {
        {
         isAdmin ? <>
         <li>
-      <NavLink to='/dashboard/adminHome'><FaHome></FaHome>Admin Home</NavLink>
+      <NavLink to='/dashboard/adminHome'><FaHome></FaHome>Admin Profile</NavLink>
       </li>
      <li>
       <NavLink to='/dashboard/addCamp'><FaUtensils></FaUtensils>Add Camp</NavLink>
       </li>
      <li>
-      <NavLink to='/dashboard/manageItems'><FaList></FaList>Manage Items</NavLink>
+      <NavLink to='/dashboard/manageCamp'><FaList></FaList>Manage Camps</NavLink>
       </li>
      <li>
-      <NavLink to='/dashboard/manageBookings'><FaAddressBook></FaAddressBook>Manage Bookings</NavLink>
+      <NavLink to='/dashboard/manageRegCamps'><FaAddressBook></FaAddressBook>Manage Reg-Camps</NavLink>
       </li>
      <li>
       <NavLink to='/dashboard/allUser'><FaUsers></FaUsers>All User</NavLink>

@@ -6,7 +6,7 @@ import PopularCamps from "./PopularCamps";
 
 const Home = () => {
   return (
-    <div>
+    <div className="pt-24">
       <Slider></Slider>
      <div>
      <PopularCamps sortAndSlice={true}></PopularCamps>

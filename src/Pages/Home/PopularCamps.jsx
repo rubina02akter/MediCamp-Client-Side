@@ -26,7 +26,7 @@ const PopularCamps = ({ sortAndSlice }) => {
   return (
     <div className="popular-camps w-11/12 mx-auto">
       <h2>Popular Camps</h2>
-      <div className="camp-list grid grid-cols-3 gap-6">
+      <div className="camp-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {popularCamps.length === 0 ? (
           <p>No popular camps available.</p>
         ) : (

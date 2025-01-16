@@ -9,6 +9,9 @@ import AdminRoute from "./AdminRoute";
 import AddCamp from "../Dashboard/DashBoard/AddCamp";
 import AllCamps from "../Pages/AllCamps/AllCamps";
 import CampDetails from "../Pages/Home/CampDetails";
+import ManageCamps from "../Dashboard/DashBoard/ManageCamps";
+import ManageRegCamps from "../Dashboard/DashBoard/ManageRegCamps";
+import AdminHome from "../Dashboard/DashBoard/AdminHome";
 
 
 const router = createBrowserRouter([
@@ -47,12 +50,24 @@ const router = createBrowserRouter([
     element: <DashBoard></DashBoard>,
     children:[
       {
+       path: 'adminHome',
+       element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+      },
+      {
         path: 'allUser',
         element: <AdminRoute><AllUser></AllUser></AdminRoute>    
       },
       {
         path: 'addCamp',
         element: <AdminRoute><AddCamp></AddCamp></AdminRoute>    
+      },
+      {
+        path: 'manageCamp',
+        element: <AdminRoute><ManageCamps></ManageCamps></AdminRoute>    
+      },
+      {
+        path: 'manageRegCamps',
+        element: <AdminRoute><ManageRegCamps></ManageRegCamps></AdminRoute>    
       },
     ]
   }

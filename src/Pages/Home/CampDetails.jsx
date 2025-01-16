@@ -122,7 +122,7 @@ const CampDetails = () => {
 
       {showModal && (
         <div className="fixed  inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="modal modal-open w-full max-w-lg">
+          <div className="modal modal-open w-full ">
             <div className="modal-box p-8">
               <h3 className="text-2xl font-semibold mb-4">
                 Participant Registration
