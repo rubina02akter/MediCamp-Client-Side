@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from "react";
 import useCamp from "../../Hooks/useCamp";
+import { Link } from "react-router-dom";
 
-
-
-const PopularCamps = () => {
+const PopularCamps = ({ sortAndSlice }) => {
   const [popularCamps, setPopularCamps] = useState([]);
-  const [camps, loading, refetch] = useCamp(); // Using the useCamp hook to get all camps
+  const [camp, loading] = useCamp();
 
   useEffect(() => {
-    // Sort camps based on the participantCount (descending) to get the popular camps
-    if (camps.length > 0) {
-      const sortedCamps = camps
-        .sort((a, b) => b.participantCount - a.participantCount) // Sort by participant count
-        .slice(0, 6); // Limit to the top 6
-      setPopularCamps(sortedCamps);
+    if (camp.length > 0) {
+      let campsToDisplay = camp;
+      
+      // Sort and slice only if the prop is true
+      if (sortAndSlice) {
+        campsToDisplay = campsToDisplay
+          .sort((a, b) => b.participantCount - a.participantCount) // Sort by participant count (descending)
+          .slice(0, 6); // Limit to the top 6 camps
+      }
+
+      setPopularCamps(campsToDisplay);
     }
-  }, [camps]); // Run this when `camps` data changes
+  }, [camp, sortAndSlice]);
 
   if (loading) return <div>Loading...</div>;
 
   return (
     <div className="popular-camps w-11/12 mx-auto">
       <h2>Popular Camps</h2>
-      <div className="camp-list  grid grid-cols-3 gap-6">
+      <div className="camp-list grid grid-cols-3 gap-6">
         {popularCamps.length === 0 ? (
           <p>No popular camps available.</p>
         ) : (
@@ -32,7 +36,7 @@ const PopularCamps = () => {
               <div className="camp-info">
                 <h3>{camp.name}</h3>
                 <p>
-                  <strong>Camp Fees:</strong> ${camp.price}
+                  <strong>Camp Fees:</strong> ${camp.campFees}
                 </p>
                 <p>
                   <strong>Date and Time:</strong>{" "}
@@ -48,13 +52,14 @@ const PopularCamps = () => {
                 <p>
                   <strong>Participants:</strong> {camp.participantCount}
                 </p>
-                
+                <Link to={`/camp/${camp._id}`} className="btn btn-link border">
+                  View Details
+                </Link>
               </div>
             </div>
           ))
         )}
       </div>
-    
     </div>
   );
 };

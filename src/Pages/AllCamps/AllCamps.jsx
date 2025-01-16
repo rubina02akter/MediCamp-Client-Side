@@ -1,12 +1,14 @@
 import useCamp from "../../Hooks/useCamp";
-import TopCamp from "../Home/TopCamp";
+import PopularCamps from "../Home/PopularCamps";
+import TopCamp from "./TopCamp";
 
 
 const AllCamps = () => {
   const [camp] = useCamp();
   return (
     <div>
-      <TopCamp></TopCamp>
+      
+      <PopularCamps></PopularCamps>
     </div>
   );
 };

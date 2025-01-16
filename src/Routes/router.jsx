@@ -8,6 +8,7 @@ import AllUser from "../Dashboard/DashBoard/AllUser";
 import AdminRoute from "./AdminRoute";
 import AddCamp from "../Dashboard/DashBoard/AddCamp";
 import AllCamps from "../Pages/AllCamps/AllCamps";
+import CampDetails from "../Pages/Home/CampDetails";
 
 
 const router = createBrowserRouter([
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
       {
         path:'available-camps',
         element: <AllCamps></AllCamps>
+      },
+      {
+        path:'/camp/:campId',
+        element: <CampDetails></CampDetails>,
+       
       },
       {
         path:'login',
