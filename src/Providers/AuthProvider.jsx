@@ -12,6 +12,7 @@ import {
 import { app } from "../firebase/firebase.init";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
+
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
@@ -21,6 +22,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
+ 
 
   // create user
   const createUser = (email, password) => {
@@ -87,6 +89,10 @@ const AuthProvider = ({ children }) => {
       return unsubscribe();
     };
   }, []);
+
+
+
+
 
   const authInfo = {
     user,

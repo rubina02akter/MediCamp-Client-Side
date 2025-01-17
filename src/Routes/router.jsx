@@ -17,15 +17,18 @@ import MyProfile from "../Dashboard/AdminProfile/MyProfile";
 import Analytics from "../Dashboard/UserRoutes/Analytics";
 import UserProfile from "../Dashboard/UserRoutes/UserProfile";
 import RegisteredCamp from "../Dashboard/UserRoutes/RegisteredCamp";
-import PaymentHistory from "../Dashboard/UserRoutes/PaymentHistory";
+import PaymentHistory from "../Dashboard/UserRoutes/Payment/PaymentHistory";
 import UpdateUserPro from "../Dashboard/UserRoutes/UpdateUserPro";
+import ErrorPage from "../Pages/ErrorRoute/ErrorPage";
+import Payment from "../Dashboard/UserRoutes/Payment/Payment";
+
 
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayOut></MainLayOut>,
-    errorElement: '',
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path:'/',
@@ -102,6 +105,10 @@ const router = createBrowserRouter([
       {
         path: 'registered-camps',
         element: <RegisteredCamp></RegisteredCamp>
+      },
+      {
+        path: 'payment/:id',
+        element: <Payment></Payment>
       },
       {
         path: 'paymentHistory',
