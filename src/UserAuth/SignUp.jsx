@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../Providers/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import SocialLogIn from "./SocialLogIn";
+import LottieSignUp from "./LottieSignUp";
 
 
 const SignUp = () => {
@@ -53,6 +54,9 @@ const SignUp = () => {
     <>
  
       <div className="flex justify-center">
+        <div>
+          <LottieSignUp></LottieSignUp>
+        </div>
         <div className="card  w-full max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">

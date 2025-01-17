@@ -74,7 +74,7 @@ const UpdateCamp = () => {
       const response = await axiosSecure.patch(`/camp/${id}`, updatedCamp);
       console.log(response.data);
 
-      if (response.data.modifiedCount > 0) {
+      // if (response.data.modifiedCount > 0) {
         reset();
         Swal.fire({
           position: "top-end",
@@ -83,8 +83,8 @@ const UpdateCamp = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/manageCamp"); 
-      }
+        navigate("/dashboard/manageCamp"); 
+      // }
     } catch (error) {
       console.error("Error updating camp:", error);
     }

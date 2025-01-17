@@ -15,7 +15,7 @@ const MainLayout = () => {
         }
       </div>
       {/* Main content with padding to avoid overlap */}
-      <div className="min-h-[calc(100vh-232px)] container mx-auto pt-24">
+      <div className="min-h-[calc(100vh-232px)] container mx-auto ">
         <Outlet />
       </div>
       <div>

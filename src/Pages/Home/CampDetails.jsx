@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useCamp from "../../Hooks/useCamp";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useJoin from "../../Hooks/useJoin";
 
 const CampDetails = () => {
   const { campId } = useParams(); // Get campId from the URL
   const [camps, setCamps] = useState(null); // Selected camp
-  const [camp, loading, refetch] = useCamp(); // Get all camps
+  const [camp, loading] = useCamp(); // Get all camps
   const { user } = useAuth(); // Logged-in user
-
+  const axiosSecure = useAxiosSecure();
+  const [ , ,refetch] = useJoin();
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false); // Modal visibility
   const [formData, setFormData] = useState({
     participantName: user?.displayName || "Guest",
@@ -55,31 +59,40 @@ const CampDetails = () => {
     console.log(participantData);
 
     //send data to the server
-    fetch("http://localhost:4000/participants", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(participantData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
-          console.log("successfully added");
-          Swal.fire({
-            title: "Success!",
-            text: " added successfully",
-            icon: "success",
-            confirmButtonText: "Ok",
-          });
-          e.target.reset();
-        }
+    // fetch("http://localhost:4000/participants", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(participantData),
+    // })
+    //   .then((res) => res.json())
+    try {
+       await axiosSecure.post("/participants", participantData)
+      console.log("Successfully added");
+      Swal.fire({
+        title: "Success!",
+        text: "Added successfully",
+        icon: "success",
+        confirmButtonText: "Ok",
       });
-  };
+      refetch()
+      e.target.reset();
+      navigate('/dashboard/registered-camps')
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong. Please try again.",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    }
+  }
 
   if (loading) return <div>Loading...</div>;
   if (!camps) return <div>Camp not found.</div>;
+
 
   return (
     <div className="camp-details w-11/12 mx-auto">

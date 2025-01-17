@@ -23,13 +23,16 @@ const SocialLogIn = () => {
   };
 
   return (
-    <div>
+    <div className="flex">
+      <div>__________</div>
       <div>
-        <button onClick={handleGoogleSignIn} className="btn">
+        <button onClick={handleGoogleSignIn} className="btn bg-rose-600 text-white">
           <FaGoogle></FaGoogle>
-          Button
+          Google
         </button>
       </div>
+      <div>_________</div>
+      
     </div>
   );
 };
