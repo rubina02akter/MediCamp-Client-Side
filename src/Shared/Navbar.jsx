@@ -71,13 +71,13 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-{/*       
+      
       {
         user && isAdmin && <li><Link to='/dashboard/adminHome'>Dashboard</Link></li>
       }
       {
-        user && !isAdmin && <li><Link to='/dashboard/userHome'>Dashboard</Link></li>
-      } */}
+        user && !isAdmin && <li><Link to='/dashboard/analytics'>Dashboard</Link></li>
+      }
 
      
     </>

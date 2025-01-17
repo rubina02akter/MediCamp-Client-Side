@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../Providers/AuthProvider";
 import SocialLogIn from "./SocialLogIn";
 
+
 const LogIn = () => {
   const { signIn } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(true);
@@ -32,7 +33,7 @@ const LogIn = () => {
       const user = result.user;
       console.log(user);
       Swal.fire({
-        title: "User Login Successful.",
+        title: " Login Successful.",
         showClass: {
           popup: "animate__animated animate__fadeInDown",
         },

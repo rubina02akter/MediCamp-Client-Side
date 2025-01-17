@@ -33,29 +33,25 @@ const Dashboard = () => {
         </>
         : 
         <>
-         <li>
-      <NavLink to='/dashboard/allUser'><FaUsers></FaUsers>All User</NavLink>
-      </li>
+      
       
         <li>
-      <NavLink to='/dashboard/userHome'><FaHome></FaHome>User Home</NavLink>
+      <NavLink to='/dashboard/analytics'><FaHome></FaHome>Analytics</NavLink>
       </li>
      <li>
-      <NavLink to='/dashboard/payment'><FaHome></FaHome>Reservation</NavLink>
+      <NavLink to='/dashboard/participant-profile'><FaHome></FaHome>Participant Profile</NavLink>
       </li>
      <li>
-      <NavLink to='/dashboard/history'><FaHome></FaHome> History</NavLink>
+      <NavLink to='/dashboard/registered-camps'><FaHome></FaHome>Registered Camps</NavLink>
       </li>
      <li>
-      <NavLink to='/dashboard/paymentHistory'><FaHome></FaHome>Payment Real History</NavLink>
+      <NavLink to='/dashboard/paymentHistory'><FaHome></FaHome>Payment History</NavLink>
       </li>
      
      <li>
-      <NavLink to='/dashboard/review'><FaAddressBook></FaAddressBook>Add Review</NavLink>
+      <NavLink to='/dashboard/feedback'><FaAddressBook></FaAddressBook>Add Feedback</NavLink>
       </li>
-     <li>
-      <NavLink to='/dashboard/bookings'><FaAddressBook></FaAddressBook>My bookings</NavLink>
-      </li>
+   
         </>
        }
 

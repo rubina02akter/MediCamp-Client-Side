@@ -71,9 +71,9 @@ const ManageItems = () => {
                     </div>
                   </td>
                   <td>{item.name}</td>
-                  <td className="text-right">${item.price}</td>
+                  <td className="text-left">${item.campFees}</td>
                   <td>
-                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                    <Link to={`/dashboard/update-camp/${item._id}`}>
                       <button className="btn btn-ghost btn-lg bg-orange-500">
                         <FaEdit
                           className="text-white"

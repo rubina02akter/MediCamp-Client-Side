@@ -50,6 +50,17 @@ const AuthProvider = ({ children }) => {
     });
 }
 
+  //
+ const editProfile = (editData) => {
+  return updateProfile(auth.currentUser, editData)
+  .then(() =>{
+    setUser({ ...auth.currentUser, ...editData })
+  })
+  .catch((error) => {
+    console.log('error', error);
+  });
+ }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -84,7 +95,7 @@ const AuthProvider = ({ children }) => {
     createUser,
     signIn,logOut,
     updateUserProfile,
-    googleSignIn,
+    googleSignIn,editProfile
   };
   return (
     <div>

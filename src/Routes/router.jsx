@@ -12,6 +12,13 @@ import CampDetails from "../Pages/Home/CampDetails";
 import ManageCamps from "../Dashboard/DashBoard/ManageCamps";
 import ManageRegCamps from "../Dashboard/DashBoard/ManageRegCamps";
 import AdminHome from "../Dashboard/DashBoard/AdminHome";
+import UpdateCamp from "../Dashboard/DashBoard/UpdateCamp";
+import MyProfile from "../Dashboard/AdminProfile/MyProfile";
+import Analytics from "../Dashboard/UserRoutes/Analytics";
+import UserProfile from "../Dashboard/UserRoutes/UserProfile";
+import RegisteredCamp from "../Dashboard/UserRoutes/RegisteredCamp";
+import PaymentHistory from "../Dashboard/UserRoutes/PaymentHistory";
+import UpdateUserPro from "../Dashboard/UserRoutes/UpdateUserPro";
 
 
 const router = createBrowserRouter([
@@ -49,9 +56,14 @@ const router = createBrowserRouter([
     path: 'dashboard',
     element: <DashBoard></DashBoard>,
     children:[
+      //admin routes
       {
        path: 'adminHome',
        element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+      },
+      {
+       path: 'update-profile',
+       element: <AdminRoute><MyProfile></MyProfile></AdminRoute>
       },
       {
         path: 'allUser',
@@ -69,6 +81,37 @@ const router = createBrowserRouter([
         path: 'manageRegCamps',
         element: <AdminRoute><ManageRegCamps></ManageRegCamps></AdminRoute>    
       },
+      {
+        path: 'update-camp/:id',
+        element: <AdminRoute><UpdateCamp></UpdateCamp></AdminRoute>  ,
+        loader: ({params}) => fetch(`http://localhost:4000/camp/${params.id}`)  
+      },
+      //user routes
+      {
+        path: 'analytics',
+        element:<Analytics></Analytics>
+      },
+      {
+        path: 'participant-profile',
+        element:<UserProfile></UserProfile>
+      },
+      {
+        path: 'update-user-profile',
+        element:<UpdateUserPro></UpdateUserPro>
+      },
+      {
+        path: 'registered-camps',
+        element: <RegisteredCamp></RegisteredCamp>
+      },
+      {
+        path: 'paymentHistory',
+        element:<PaymentHistory></PaymentHistory>
+      },
+      {
+        path: 'feedback',
+        element:<PaymentHistory></PaymentHistory>
+      },
+    
     ]
   }
 
