@@ -5,7 +5,7 @@ import PopularCamps from "../Home/PopularCamps";
 const AllCamps = () => {
   const [camp] = useCamp();
   return (
-    <div className="pt-24">
+    <div>
       <div className="w-11/12 mx-auto">
       <div className="py-6">
           <label className="input input-bordered flex items-center gap-2">

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Slider from "./Slider";
-import TopCamp from "../AllCamps/TopCamp";
 import PopularCamps from "./PopularCamps";
 
 
