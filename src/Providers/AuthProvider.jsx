@@ -17,6 +17,7 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [emails, setEmails] = useState([]);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
@@ -95,7 +96,8 @@ const AuthProvider = ({ children }) => {
     createUser,
     signIn,logOut,
     updateUserProfile,
-    googleSignIn,editProfile
+    googleSignIn,editProfile,
+    emails, setEmails
   };
   return (
     <div>

@@ -24,7 +24,7 @@ const PopularCamps = ({ sortAndSlice }) => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="popular-camps w-11/12 mx-auto">
+    <div className="popular-camps w-11/12 mx-auto mt-6">
       
       <div className="camp-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {popularCamps.length === 0 ? (
@@ -52,7 +52,7 @@ const PopularCamps = ({ sortAndSlice }) => {
                 <p>
                   <strong>Participants:</strong> {camp.participantCount}
                 </p>
-                <Link to={`/camp/${camp._id}`} className="btn btn-link border">
+                <Link to={`/camp/${camp._id}`} className="btn btn-block my-2 btn-primary border">
                   View Details
                 </Link>
               </div>
