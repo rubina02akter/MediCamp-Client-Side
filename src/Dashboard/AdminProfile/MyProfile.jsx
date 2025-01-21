@@ -46,7 +46,7 @@ const MyProfile = () => {
             />
           </div>
           <div className="form-control mt-6">
-            <button className="btn rounded-none text-white bg-gradient-to-r from-sky-500 to-indigo-500">
+            <button className="btn rounded-none text-white bg-[#4e6f96]">
               Update Information
             </button>
           </div>

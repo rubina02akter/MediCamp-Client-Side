@@ -47,9 +47,9 @@ const ManageItems = () => {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Image</th>
-                <th>Item Name</th>
-                <th>Price</th>
+                <th>Thumbnail</th>
+                <th>Camp Name</th>
+                <th>Camp-Fees</th>
                 <th>Update</th>
                 <th>Delete</th>
               </tr>

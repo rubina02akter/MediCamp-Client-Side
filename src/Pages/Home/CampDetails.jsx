@@ -7,14 +7,14 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useJoin from "../../Hooks/useJoin";
 
 const CampDetails = () => {
-  const { campId } = useParams(); // Get campId from the URL
-  const [camps, setCamps] = useState(null); // Selected camp
-  const [camp, loading] = useCamp(); // Get all camps
-  const { user } = useAuth(); // Logged-in user
+  const { campId } = useParams();
+  const [camps, setCamps] = useState(null);
+  const [camp, loading] = useCamp();
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const [ , ,refetch] = useJoin();
+  const [, , refetch] = useJoin();
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false); // Modal visibility
+  const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     participantName: user?.displayName || "Guest",
     participantEmail: user?.email || "guest@example.com",
@@ -38,11 +38,7 @@ const CampDetails = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const age = form.age.value;
-    const phoneNumber = form.phoneNumber.value;
-    const gender = form.gender.value;
-    const emergencyContact = form.emergencyContact.value;
+    const { age, phoneNumber, gender, emergencyContact } = formData;
 
     const participantData = {
       name: formData.participantName,
@@ -56,31 +52,18 @@ const CampDetails = () => {
       location: camps.location,
     };
 
-    console.log(participantData);
-
-    //send data to the server
-    // fetch("http://localhost:4000/participants", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(participantData),
-    // })
-    //   .then((res) => res.json())
     try {
-       await axiosSecure.post("/participants", participantData)
-      console.log("Successfully added");
+      await axiosSecure.post("/participants", participantData);
       Swal.fire({
         title: "Success!",
         text: "Added successfully",
         icon: "success",
         confirmButtonText: "Ok",
       });
-      refetch()
+      refetch();
       e.target.reset();
-      navigate('/dashboard/registered-camps')
+      navigate("/dashboard/registered-camps");
     } catch (error) {
-      console.error("Error submitting data:", error);
       Swal.fire({
         title: "Error!",
         text: "Something went wrong. Please try again.",
@@ -88,44 +71,48 @@ const CampDetails = () => {
         confirmButtonText: "Ok",
       });
     }
-  }
+  };
 
   if (loading) return <div>Loading...</div>;
   if (!camps) return <div>Camp not found.</div>;
 
-
   return (
-    <div className="camp-details w-11/12 mx-auto">
-      <h2 className="text-3xl font-semibold mb-4">{camps.name}</h2>
-      <div className="camp-detail-card">
-        <img
-          src={camps.image}
-          alt={camps.name}
-          className="camp-detail-image rounded-lg"
-        />
-        <div className="camp-detail-info mt-4">
-          <p>
+    <div className="camp-details w-11/12 mx-auto py-8">
+      <h2 className="text-3xl font-semibold mb-6 text-center">{camps.name}</h2>
+      <div className="camp-detail-card flex flex-col lg:flex-row gap-6">
+        {/* Left: Image */}
+        <div className="lg:w-1/2">
+          <img
+            src={camps.image}
+            alt={camps.name}
+            className="rounded-lg w-full h-96 object-cover shadow-md"
+          />
+        </div>
+
+        {/* Right: Description */}
+        <div className="lg:w-1/2 flex flex-col justify-center">
+          <p className="text-lg text-gray-700 mb-2">
             <strong>Camp Fees:</strong> ${camps.campFees || camps.price}
           </p>
-          <p>
+          <p className="text-lg text-gray-700 mb-2">
             <strong>Date and Time:</strong>{" "}
             {new Date(camps.dateAndTime).toLocaleString()}
           </p>
-          <p>
+          <p className="text-lg text-gray-700 mb-2">
             <strong>Location:</strong> {camps.location}
           </p>
-          <p>
+          <p className="text-lg text-gray-700 mb-2">
             <strong>Healthcare Professional:</strong>{" "}
             {camps.healthcareProfessional}
           </p>
-          <p>
+          <p className="text-lg text-gray-700 mb-2">
             <strong>Participants:</strong> {camps.participantCount || 0}
           </p>
-          <p>
+          <p className="text-lg text-gray-700 mb-4">
             <strong>Description:</strong> {camps.description}
           </p>
           <button
-            className="btn btn-primary mt-4 hover:bg-primary-focus"
+            className="btn btn-primary hover:bg-primary-focus mt-4"
             onClick={() => setShowModal(true)}
           >
             Join Camp
@@ -133,15 +120,16 @@ const CampDetails = () => {
         </div>
       </div>
 
+      {/* Modal */}
       {showModal && (
-        <div className="fixed  inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="modal modal-open w-full ">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="modal modal-open w-11/12 mx-auto max-w-2xl bg-white rounded-lg shadow-lg">
             <div className="modal-box p-8">
               <h3 className="text-2xl font-semibold mb-4">
                 Participant Registration
               </h3>
               <form onSubmit={handleSubmit} className="space-y-8">
-                {/* Camp Name, Fees, Location */}
+                {/* Camp Name, Fees */}
                 <div className="md:flex gap-4">
                   <div className="form-control md:w-1/2">
                     <label className="label">
@@ -223,7 +211,6 @@ const CampDetails = () => {
                   </div>
                 </div>
 
-                {/* Gender and Emergency Contact */}
                 <div className="md:flex gap-4">
                   <div className="form-control md:w-1/2">
                     <label className="label">
@@ -257,7 +244,7 @@ const CampDetails = () => {
                   </div>
                 </div>
 
-                {/* Submit and Cancel buttons */}
+                {/* Submit and Cancel Buttons */}
                 <div className="flex flex-col gap-4">
                   <button type="submit" className="btn btn-primary w-full">
                     Submit
@@ -265,17 +252,7 @@ const CampDetails = () => {
                   <button
                     type="button"
                     className="btn btn-secondary w-full"
-                    onClick={() => {
-                      setShowModal(false);
-                      setFormData({
-                        participantName: user?.displayName || "Guest",
-                        participantEmail: user?.email || "guest@example.com",
-                        age: "",
-                        phoneNumber: "",
-                        gender: "",
-                        emergencyContact: "",
-                      });
-                    }}
+                    onClick={() => setShowModal(false)}
                   >
                     Cancel
                   </button>

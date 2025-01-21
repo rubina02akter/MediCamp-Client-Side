@@ -15,7 +15,7 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col lg:flex-row">
       {/* Sidebar for large screens */}
-      <div className="w-64 min-h-screen bg-[#D1A054] py-12 hidden lg:block">
+      <div className="w-64 min-h-screen text-white bg-[#274260] py-12 hidden lg:block">
         <ul className="menu p-4">
           {isAdmin ? (
             <>

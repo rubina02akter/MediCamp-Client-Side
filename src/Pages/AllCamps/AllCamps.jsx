@@ -1,39 +1,61 @@
+import React, { useState } from "react";
 import useCamp from "../../Hooks/useCamp";
 import PopularCamps from "../Home/PopularCamps";
-
+import SearchBar from "../../components/SearchBar";
 
 const AllCamps = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortCriteria, setSortCriteria] = useState("default");
   const [camp] = useCamp();
+
+  // Filter camps based on the search query
+  const filteredCamps = camp.filter((c) =>
+    Object.values(c)
+      .join(" ") // Join all field values into a single string
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase())
+  );
+
+  // Sort camps based on the selected criteria
+  const sortedCamps = [...filteredCamps].sort((a, b) => {
+    switch (sortCriteria) {
+      case "mostRegistered":
+        return b.participantCount - a.participantCount; // Sort by most registered participants
+      case "campFees":
+        return a.campFees - b.campFees; // Sort by camp fees (ascending)
+      case "alphabetical":
+        return a.name.localeCompare(b.name); // Sort by camp name alphabetically
+      default:
+        return 0; // Default order (unsorted)
+    }
+  });
+
   return (
     <div>
-      <div className="w-11/12 mx-auto">
-      <div className="py-6">
-          <label className="input input-bordered flex items-center gap-2">
-            <input
-              type="text"
-              className="grow"
-              placeholder="Search"
-              // value={searchQuery}
-              // onChange={handleSearch}
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70"
-            >
-              <path
-                fillRule="evenodd"
-                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </label>
-        </div>
+      <div className="w-11/12 mx-auto py-24">
+        {/* Search Bar */}
+        <SearchBar
+          placeholder="Search by Camp Name, Date, or Professional Name"
+          onSearch={setSearchQuery}
+        />
 
+        {/* Sort Dropdown */}
+        <div className="py-6">
+          <select
+            className="select select-bordered w-full max-w-xs"
+            value={sortCriteria}
+            onChange={(e) => setSortCriteria(e.target.value)}
+          >
+            <option value="default">Sort By</option>
+            <option value="mostRegistered">Most Registered</option>
+            <option value="campFees">Camp Fees</option>
+            <option value="alphabetical">Alphabetical Order</option>
+          </select>
+        </div>
       </div>
-      
-      <PopularCamps></PopularCamps>
+
+      {/* Display Popular Camps */}
+      <PopularCamps camps={sortedCamps} />
     </div>
   );
 };

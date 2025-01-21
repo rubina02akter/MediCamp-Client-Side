@@ -37,7 +37,7 @@ const AdminHome = () => {
 
             <Link
               to="/dashboard/update-profile"
-              className="btn  bg-gradient-to-r from-sky-500 to-indigo-500 mt-4 w-full rounded-none text-white"
+              className="btn  bg-gradient-to-r from-[#6081a9] to-[#274260] mt-4 w-full rounded-none text-white"
             >
               Edit Profile
             </Link>

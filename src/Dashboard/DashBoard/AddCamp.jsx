@@ -140,7 +140,7 @@ const AddCamp = () => {
         </div>
 
         {/* Submit Button */}
-        <button className="btn btn-primary w-full my-4">
+        <button className="btn bg-gray-800 text-white w-full my-4">
           Add Camp <FaPlusCircle className="ml-2" />
         </button>
       </form>

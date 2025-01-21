@@ -21,6 +21,7 @@ import PaymentHistory from "../Dashboard/UserRoutes/Payment/PaymentHistory";
 import UpdateUserPro from "../Dashboard/UserRoutes/UpdateUserPro";
 import ErrorPage from "../Pages/ErrorRoute/ErrorPage";
 import Payment from "../Dashboard/UserRoutes/Payment/Payment";
+import Feedback from "../Dashboard/UserRoutes/Feedback";
 
 
 
@@ -116,7 +117,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'feedback',
-        element:<PaymentHistory></PaymentHistory>
+        element:<Feedback></Feedback>
       },
     
     ]

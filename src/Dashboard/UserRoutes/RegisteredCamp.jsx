@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import useAuth from "../../Hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useStatus from "../../Hooks/useStatus";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const RegisteredCamp = () => {
+  const { id } = useParams();
+  console.log(id);
   const [participantData, setParticipantData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useAuth();
   const [pay] = useStatus([]);
-  console.log(pay); // To check payment data
   const axiosSecure = useAxiosSecure();
+  const [stat, setState] = useState([]);
 
+  // Fetch participant data
   useEffect(() => {
     const fetchParticipantData = async () => {
       try {
@@ -35,6 +38,23 @@ const RegisteredCamp = () => {
     fetchParticipantData();
   }, [user?.email]);
 
+  // Fetch additional data for a specific camp
+  useEffect(() => {
+    if (id && user?.email) {
+      axiosSecure
+        .get(`/update/${id}`, {
+          params: {
+            email: user?.email,
+          },
+        })
+        .then((res) => {
+          setState(res.data);
+        })
+        .catch((err) => console.error("Error fetching update data:", err));
+    }
+  }, [axiosSecure, id, user?.email]);
+  console.log(stat);
+
   if (loading) {
     return <div className="text-center py-4">Loading...</div>;
   }
@@ -52,8 +72,6 @@ const RegisteredCamp = () => {
   }
 
   const handleDeleteUser = (id) => {
-    console.log('Deleting payment with ID:', id); // Log the ID being passed
-  
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -70,21 +88,13 @@ const RegisteredCamp = () => {
             if (res.data.deletedCount > 0) {
               setParticipantData((prevData) =>
                 prevData.filter((camp) => camp._id !== id)
-              ); // Remove the deleted camp from the UI
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your camp registration has been deleted.",
-                icon: "success",
-              });
+              );
+              Swal.fire("Deleted!", "Your camp registration has been deleted.", "success");
             }
           })
           .catch((error) => {
-            console.error('Error deleting camp:', error); // Log any error
-            Swal.fire({
-              title: "Error!",
-              text: "There was an issue deleting the camp.",
-              icon: "error",
-            });
+            console.error("Error deleting camp:", error);
+            Swal.fire("Error!", "There was an issue deleting the camp.", "error");
           });
       }
     });
@@ -99,12 +109,8 @@ const RegisteredCamp = () => {
         <table className="min-w-full bg-white">
           <thead>
             <tr className="bg-blue-600 text-white">
-              <th className="px-6 py-3 text-left text-sm font-medium">
-                Camp Name
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-medium">
-                Camp Fees
-              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium">Camp Name</th>
+              <th className="px-6 py-3 text-left text-sm font-medium">Camp Fees</th>
               <th className="px-6 py-3 text-left text-sm font-medium">
                 Participant Name
               </th>
@@ -114,14 +120,11 @@ const RegisteredCamp = () => {
               <th className="px-6 py-3 text-left text-sm font-medium">
                 Payment Confirmation Status
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium">
-                Action
-              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium">Action</th>
             </tr>
           </thead>
           <tbody>
             {participantData.map((camp, index) => {
-              // Find the payment status for the current camp
               const payment = pay.find((p) => p.cartIds.includes(camp._id));
               const paymentStatus = payment ? payment.status : "Unpaid";
               const confirmationStatus =
@@ -165,36 +168,34 @@ const RegisteredCamp = () => {
                   <td className="px-6 py-4 text-sm font-medium text-gray-700">
                     <div className="grid gap-2">
                       {paymentStatus === "Unpaid" ? (
-                        <Link
-                          to={`/dashboard/payment/${camp._id}`}
-                          className="bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        >
-                          <button>Pay</button>
-                        </Link>
+                        <>
+                          <Link
+                            to={`/dashboard/payment/${camp._id}`}
+                            className="bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          >
+                            Pay
+                          </Link>
+                          <button
+                            onClick={() => handleDeleteUser(camp._id)}
+                            className="ml-3 bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                          >
+                            Cancel
+                          </button>
+                        </>
                       ) : (
-                        <button
-                          className="bg-gray-400 text-white px-4 py-2 rounded-lg text-center text-sm font-semibold"
-                          disabled
-                        >
-                          Paid
-                        </button>
-                      )}
-
-                      <button
-                        onClick={() => handleDeleteUser(camp._id)} // Corrected to pass camp._id
-                        className={`ml-3 ${
-                          paymentStatus === "Paid"
-                            ? "bg-gray-400"
-                            : "bg-red-600"
-                        } text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500`}
-                        disabled={paymentStatus === "Paid"}
-                      >
-                        Cancel
-                      </button>
-                      {paymentStatus === "Paid" && (
-                        <button className="ml-3 bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500">
-                          Feedback
-                        </button>
+                        <>
+                          <button
+                            className="bg-gray-400 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+                            disabled
+                          >
+                            Paid
+                          </button>
+                          <Link to="/">
+                            <button className="ml-3 bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                              Feedback
+                            </button>
+                          </Link>
+                        </>
                       )}
                     </div>
                   </td>

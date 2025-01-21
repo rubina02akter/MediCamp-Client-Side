@@ -14,28 +14,54 @@ const CheckOutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
+  const { user} = useAuth();
   const [participants, refetch] = useJoin();
   const navigate = useNavigate();
+  
 
   // Find the single camp price using the camp ID
-  const singleCampPrice = participants.find((item) => item._id === id)?.campFees;
+  const singleCampPrice = participants.find((item) => item._id === id) || null;
 
   useEffect(() => {
-    if (singleCampPrice > 0) {
+    if (singleCampPrice && singleCampPrice.campFees > 0) {
       axiosSecure
-        .post("/create-payment-intent", { campFees: singleCampPrice })
+        .post("/create-payment-intent", { campFees: singleCampPrice.campFees })
         .then((res) => {
+          console.log("Client Secret:", res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         })
         .catch((err) => console.error("Error creating payment intent", err));
     }
   }, [axiosSecure, singleCampPrice]);
 
+//   useEffect(() => {
+//   if (singleCampPrice) {
+//     axiosSecure
+//       .get(`/update/${singleCampPrice._id}`, {
+//         params: {
+//           email: user?.email, // Pass the email as a query parameter
+//         },
+//       })
+//       .then((res) => {
+//         setState(res.data);
+//       })
+//       .catch((err) => console.error("Error fetching update data:", err));
+//   }
+// }, [axiosSecure, singleCampPrice, user?.email]);
+
+//   console.log(stat)
+
+  const confirmationStatus = ""; // Define confirmation status if needed
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!stripe || !elements) return;
+
+    if (!clientSecret) {
+      setError("Payment could not be processed. Please try again later.");
+      return;
+    }
 
     const card = elements.getElement(CardElement);
 
@@ -75,13 +101,18 @@ const CheckOutForm = () => {
       setTransactionId(paymentIntent.id);
 
       const payment = {
+        prevId: singleCampPrice._id,
         email: user.email,
-        payment: singleCampPrice,
+        payment: singleCampPrice.campFees,
+        name: singleCampPrice.campName,
+        age: singleCampPrice.age,
+        location: singleCampPrice.location,
+        participant: user?.displayName || "User",
         transactionId: paymentIntent.id,
         date: new Date(),
-        cartIds: [id], // Only the single camp ID is used here
+        cartIds: [id],
         status: "paid",
-        confirmationStatus: "Confirmed",
+        confirmationStatus: confirmationStatus,
       };
 
       try {
@@ -104,9 +135,11 @@ const CheckOutForm = () => {
     }
   };
 
-  if (singleCampPrice <= 0) {
+  if (!singleCampPrice || singleCampPrice.campFees <= 0) {
     return <p className="text-red-600">Invalid payment amount.</p>;
   }
+
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -134,7 +167,9 @@ const CheckOutForm = () => {
         Pay
       </button>
       {error && <p className="text-red-600">{error}</p>}
-      {transactionId && <p className="text-green-600">Your transaction ID: {transactionId}</p>}
+      {transactionId && (
+        <p className="text-green-600">Your transaction ID: {transactionId}</p>
+      )}
     </form>
   );
 };
