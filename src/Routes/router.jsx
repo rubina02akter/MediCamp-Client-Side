@@ -22,6 +22,7 @@ import UpdateUserPro from "../Dashboard/UserRoutes/UpdateUserPro";
 import ErrorPage from "../Pages/ErrorRoute/ErrorPage";
 import Payment from "../Dashboard/UserRoutes/Payment/Payment";
 import Feedback from "../Dashboard/UserRoutes/Feedback";
+import Contact from "../Pages/Contact/Contact";
 
 
 
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path:'signup',
         element: <SignUp></SignUp>
+      },
+      {
+        path:'contact',
+        element: <Contact></Contact>
       },
     ]
   },

@@ -16,8 +16,8 @@ const CampDetails = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
-    participantName: user?.displayName || "Guest",
-    participantEmail: user?.email || "guest@example.com",
+    participantName: user?.displayName || "User",
+    participantEmail: user?.email || "user@mail.com",
     age: "",
     phoneNumber: "",
     gender: "",

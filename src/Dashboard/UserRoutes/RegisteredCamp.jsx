@@ -110,10 +110,10 @@ const RegisteredCamp = () => {
             {participantData.map((camp, index) => {
               const payment = pay.find((p) => p.cartIds.includes(camp._id));
               const paymentStatus = payment ? payment.status : "Unpaid";
-              const confirmationStatus =
-                payment?.confirmationStatus === "Paid"
-                  ? "Confirmed"
-                  : "Pending";
+              // const confirmationStatus =
+              //   payment?.confirmationStatus === "Paid"
+              //     ? "Confirmed"
+              //     : "Pending";
 
               return (
                 <tr key={index} className="border-b hover:bg-gray-50">

@@ -51,7 +51,7 @@ const CheckOutForm = () => {
 
 //   console.log(stat)
 
-  const confirmationStatus = ""; // Define confirmation status if needed
+  const confirmationStatus = ""; 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
