@@ -37,7 +37,7 @@ const UserProfile = () => {
 
           <Link
             to="/dashboard/update-user-profile"
-            className="btn  bg-gradient-to-r from-sky-500 to-indigo-500 mt-4 w-full rounded-none text-white"
+            className="btn  bg-[#2B4C86] mt-4 w-full rounded-none text-white"
           >
             Edit Profile
           </Link>

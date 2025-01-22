@@ -8,10 +8,21 @@ const ManageRegCamps = () => {
   const [error, setError] = useState(null);
   const axiosSecure = useAxiosSecure();
 
+  const updateStatus = "Confirmed";
+  const data = {
+  confirmationStatus: updateStatus,
+  };
+
+
+  const handleConfirm = (id) => {
+    axiosSecure.patch(`/payments/${id}`, data).then((res) => console.log(res));
+    window.location.reload()
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/payments`);
+        const response = await fetch(`https://medicamp-server-side.vercel.app/payments`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -25,16 +36,6 @@ const ManageRegCamps = () => {
     };
     fetchData();
   }, []);
-
-  const updateStatus = "Confirmed";
-  const data = {
-    confirmationStatus: updateStatus,
-  };
-
-  const handleConfirm = (id) => {
-    axiosSecure.patch(`/payments/${id}`, data).then((res) => console.log(res));
-    
-  };
 
 
   // Handle delete with confirmation
@@ -73,7 +74,7 @@ const ManageRegCamps = () => {
             <th className="border border-gray-300 px-4 py-2">
               Participant Name
             </th>
-            <th className="border border-gray-300 px-4 py-2">Email</th>
+            {/* <th className="border border-gray-300 px-4 py-2">Email</th> */}
             <th className="border border-gray-300 px-4 py-2">Payment Status</th>
             <th className="border border-gray-300 px-4 py-2">
               Confirmation Status
@@ -93,7 +94,7 @@ const ManageRegCamps = () => {
               <td className="border border-gray-300 px-4 py-2">
                 {camp.participant}
               </td>
-              <td className="border border-gray-300 px-4 py-2">{camp.email}</td>
+              {/* <td className="border border-gray-300 px-4 py-2">{camp.email}</td> */}
               <td className="border border-gray-300 px-4 py-2">
                 {camp.status === "paid" ? (
                   <span className="text-green-600 font-bold">Paid</span>

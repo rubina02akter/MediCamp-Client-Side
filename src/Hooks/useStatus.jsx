@@ -5,7 +5,7 @@ const useStatus = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:4000/payments")
+    fetch("https://medicamp-server-side.vercel.app/payments")
       .then((res) => res.json())
       .then((data) => {
         setPay(data);

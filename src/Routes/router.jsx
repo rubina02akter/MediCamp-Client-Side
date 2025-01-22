@@ -23,6 +23,7 @@ import ErrorPage from "../Pages/ErrorRoute/ErrorPage";
 import Payment from "../Dashboard/UserRoutes/Payment/Payment";
 import Feedback from "../Dashboard/UserRoutes/Feedback";
 import Contact from "../Pages/Contact/Contact";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -93,7 +94,7 @@ const router = createBrowserRouter([
       {
         path: 'update-camp/:id',
         element: <AdminRoute><UpdateCamp></UpdateCamp></AdminRoute>  ,
-        loader: ({params}) => fetch(`http://localhost:4000/camp/${params.id}`)  
+        loader: ({params}) => fetch(`https://medicamp-server-side.vercel.app/camp/${params.id}`)  
       },
       //user routes
       {
@@ -102,23 +103,23 @@ const router = createBrowserRouter([
       },
       {
         path: 'participant-profile',
-        element:<UserProfile></UserProfile>
+        element: <PrivateRoute><UserProfile></UserProfile></PrivateRoute>
       },
       {
         path: 'update-user-profile',
-        element:<UpdateUserPro></UpdateUserPro>
+        element:<PrivateRoute><UpdateUserPro></UpdateUserPro></PrivateRoute>
       },
       {
         path: 'registered-camps',
-        element: <RegisteredCamp></RegisteredCamp>
+        element: <PrivateRoute><RegisteredCamp></RegisteredCamp></PrivateRoute>
       },
       {
         path: 'payment/:id',
-        element: <Payment></Payment>
+        element: <PrivateRoute><Payment></Payment></PrivateRoute>
       },
       {
         path: 'paymentHistory',
-        element:<PaymentHistory></PaymentHistory>
+        element:<PrivateRoute><PaymentHistory></PaymentHistory></PrivateRoute>
       },
       {
         path: 'feedback',

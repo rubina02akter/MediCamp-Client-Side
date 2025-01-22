@@ -34,7 +34,7 @@ const AllCamps = () => {
 
   return (
     <div>
-      <div className="w-11/12 mx-auto py-24">
+      <div className="w-11/12 mx-auto pt-24">
         {/* Search Bar */}
         <SearchBar
           placeholder="Search by Camp Name, Date, or Professional Name"

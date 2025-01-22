@@ -20,7 +20,7 @@ const RegisteredCamp = () => {
     const fetchParticipantData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/participants/${user?.email}`
+          `https://medicamp-server-side.vercel.app/participants/${user?.email}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -91,7 +91,7 @@ const RegisteredCamp = () => {
       <div className="overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200">
         <table className="min-w-full bg-white">
           <thead>
-            <tr className="bg-blue-600 text-white">
+            <tr className="text-white bg-[#2B4D86]">
               <th className="px-6 py-3 text-left text-sm font-medium">Camp Name</th>
               <th className="px-6 py-3 text-left text-sm font-medium">Camp Fees</th>
               <th className="px-6 py-3 text-left text-sm font-medium">
@@ -146,7 +146,7 @@ const RegisteredCamp = () => {
                         <>
                           <Link
                             to={`/dashboard/payment/${camp._id}`}
-                            className="bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="bg-[#275899] text-white px-4 py-2 rounded-lg text-center text-sm font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                           >
                             Pay
                           </Link>
@@ -165,7 +165,7 @@ const RegisteredCamp = () => {
                           >
                             Paid
                           </button>
-                          <Link to="/">
+                          <Link to="/dashboard/feedback">
                             <button className="ml-3 bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500">
                               Feedback
                             </button>

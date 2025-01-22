@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useCamp from "../../Hooks/useCamp";
+import { FaLayerGroup } from "react-icons/fa";
 
 const PopularCamps = ({ sortAndSlice, camps }) => {
   const [popularCamps, setPopularCamps] = useState([]);
@@ -25,16 +26,18 @@ const PopularCamps = ({ sortAndSlice, camps }) => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="popular-camps w-11/12 mx-auto mt-8">
-      <h2 className="text-3xl font-bold text-center mb-6">Popular Camps</h2>
+    <div className="popular-camps w-11/12 mx-auto ">
+      
 
       {/* Button to toggle between 2 or 3 column layout */}
-      <button
+    <div className="flex justify-end pb-4">
+    <button
         onClick={toggleLayout}
-        className="btn btn-primary mb-4"
+        className="btn text-white bg-[#2B4D86]"
       >
-        {isTwoColumn ? "Switch to 3 Columns" : "Switch to 2 Columns"}
+       <FaLayerGroup></FaLayerGroup> {isTwoColumn ? "Toggle Layout" : "Toggle Layout"}
       </button>
+    </div>
 
       <div
         className={`grid gap-6 ${isTwoColumn ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"}`}
@@ -47,7 +50,7 @@ const PopularCamps = ({ sortAndSlice, camps }) => {
           popularCamps.map((camp) => (
             <div
               key={camp._id}
-              className="card shadow-lg border border-gray-200 hover:shadow-2xl transition-transform transform hover:scale-105"
+              className="card shadow-lg  border border-gray-200 hover:shadow-2xl transition-transform transform hover:scale-105"
             >
               <figure className="overflow-hidden">
                 <img
@@ -58,26 +61,26 @@ const PopularCamps = ({ sortAndSlice, camps }) => {
               </figure>
               <div className="card-body p-4">
                 <h3 className="card-title text-lg font-semibold">{camp.name}</h3>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm ">
                   <strong>Camp Fees:</strong> ${camp.campFees}
                 </p>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm ">
                   <strong>Date and Time:</strong>{" "}
                   {new Date(camp.dateAndTime).toLocaleString()}
                 </p>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm ">
                   <strong>Location:</strong> {camp.location}
                 </p>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm ">
                   <strong>Healthcare Professional:</strong>{" "}
                   {camp.healthcareProfessional}
                 </p>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm ">
                   <strong>Participants:</strong> {camp.participantCount}
                 </p>
                 <Link
                   to={`/camp/${camp._id}`}
-                  className="btn btn-block btn-primary mt-3"
+                  className="btn btn-block text-white bg-[#2B4D86] mt-3"
                 >
                   View Details
                 </Link>

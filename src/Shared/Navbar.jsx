@@ -96,7 +96,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="text-white fixed w-full z-50 bg-opacity-40 bg-black">
+    <nav className="text-white fixed w-full z-50 bg-opacity-40 bg-[#152c54]">
       <div className="container mx-auto flex justify-between items-center p-4">
         <div className="text-xl font-bold">MediCamp</div>
         <ul className="hidden lg:flex gap-8">{links}</ul>

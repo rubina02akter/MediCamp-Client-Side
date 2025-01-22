@@ -5,7 +5,7 @@ const useFetchParticipants = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:4000/participants")
+    fetch("https://medicamp-server-side.vercel.app/participants")
       .then((res) => res.json())
       .then((data) => {
         setParticipants(data);

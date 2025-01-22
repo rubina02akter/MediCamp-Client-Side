@@ -25,7 +25,7 @@ const AdminHome = () => {
         </div>
 
         {/* Profile Card */}
-        <div className="flex justify-center pt-36 ">
+        <div className="flex justify-center pt-36">
           <div className="bg-white shadow-lg border border-blue-900 rounded-lg p-6 w-80 text-center">
             <h2 className="text-xl font-semibold text-gray-800">{user.displayName}</h2>
             <p className="text-gray-600 mt-2">Email: {user.email}</p>
@@ -37,7 +37,7 @@ const AdminHome = () => {
 
             <Link
               to="/dashboard/update-profile"
-              className="btn  bg-gradient-to-r from-[#6081a9] to-[#274260] mt-4 w-full rounded-none text-white"
+              className="btn text-white bg-[#2B4C86] mt-4 w-full rounded-none "
             >
               Edit Profile
             </Link>

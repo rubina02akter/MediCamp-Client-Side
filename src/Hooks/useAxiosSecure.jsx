@@ -3,7 +3,7 @@ import useAuth from "./useAuth";
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: 'https://medicamp-server-side.vercel.app',
 
 })
 

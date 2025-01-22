@@ -35,7 +35,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-950 to-rose-900 min-h-screen text-white py-24 px-10 flex flex-col-reverse lg:flex-row justify-between items-center">
+    <div className="bg-[#2B4E86] min-h-screen text-white py-24 px-10 flex flex-col-reverse lg:flex-row justify-between items-center">
       {/* Left Section: Contact Info */}
       <div className="lg:w-1/3 space-y-6">
         <h2 className="text-2xl font-semibold mb-6">CONTACT INFO</h2>
@@ -139,7 +139,7 @@ const Contact = () => {
       {/* Right Section: Contact Form */}
       <div className="lg:w-2/3 bg-gray-900 p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold mb-6">
-        <span className="text-rose-800">Contact</span> with us  
+        <span className="text-[#5d8ddb]">Contact</span> with us  
         </h2>
         <form
           ref={form}
@@ -169,7 +169,7 @@ const Contact = () => {
           ></textarea>
           <button
             type="submit"
-            className="w-full p-3 bg-gradient-to-r from-rose-800 to-blue-800 text-white rounded-md  transition"
+            className="w-full p-3 bg-[#2B4E86] text-white rounded-md  transition"
           >
             Send Email
           </button>

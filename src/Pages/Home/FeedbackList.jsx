@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Feedback = () => {
+const FeedbackList = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Feedback = () => {
   );
 };
 
-export default Feedback;
+export default FeedbackList;

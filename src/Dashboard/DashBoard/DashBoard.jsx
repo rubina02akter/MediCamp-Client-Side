@@ -15,8 +15,8 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col lg:flex-row">
       {/* Sidebar for large screens */}
-      <div className="w-64 min-h-screen text-white bg-[#274260] py-12 hidden lg:block">
-        <ul className="menu p-4">
+      <div className="w-64 min-h-screen  text-white bg-[#2B4C86] py-12 hidden lg:block">
+        <ul className="menu p-4 ">
           {isAdmin ? (
             <>
               <li>
@@ -89,7 +89,7 @@ const Dashboard = () => {
       </div>
 
       {/* Dropdown for small and medium screens */}
-      <div className="lg:hidden w-full bg-[#D1A054] py-4 px-6">
+      <div className="lg:hidden w-full text-white  bg-[#2B4C86] py-4 px-6">
         <button
           className="flex items-center gap-2 text-white"
           onClick={toggleDropdown}
@@ -98,7 +98,7 @@ const Dashboard = () => {
           Menu
         </button>
         {isDropdownOpen && (
-          <ul className="menu p-4 bg-[#D1A054]">
+          <ul className="menu p-4 text-white bg-[#2B4C86]">
             {isAdmin ? (
               <>
                 <li>
@@ -171,7 +171,7 @@ const Dashboard = () => {
         )}
       </div>
 
-      <div className="flex-1 py-12">
+      <div className="flex-1 ">
         <Outlet></Outlet>
       </div>
     </div>

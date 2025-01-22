@@ -35,7 +35,7 @@ const PaymentHistory = () => {
                 <th>{index + 1}</th>
                 <td>${payment.payment}</td>
                 <td>{payment.transactionId}</td>
-                <td className="btn btn-error text-white">{payment.status}</td>
+                <td className="btn bg-[#2B4D86] text-white">{payment.status}</td>
               </tr>
             ))}
           </tbody>
