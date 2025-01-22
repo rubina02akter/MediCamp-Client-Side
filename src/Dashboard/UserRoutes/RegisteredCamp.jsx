@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import useAuth from "../../Hooks/useAuth";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useStatus from "../../Hooks/useStatus";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const RegisteredCamp = () => {
-  const { id } = useParams();
-  console.log(id);
+
   const [participantData, setParticipantData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useAuth();
   const [pay] = useStatus([]);
   const axiosSecure = useAxiosSecure();
-  const [stat, setState] = useState([]);
+
 
   // Fetch participant data
   useEffect(() => {
@@ -38,23 +37,7 @@ const RegisteredCamp = () => {
     fetchParticipantData();
   }, [user?.email]);
 
-  // Fetch additional data for a specific camp
-  useEffect(() => {
-    if (id && user?.email) {
-      axiosSecure
-        .get(`/update/${id}`, {
-          params: {
-            email: user?.email,
-          },
-        })
-        .then((res) => {
-          setState(res.data);
-        })
-        .catch((err) => console.error("Error fetching update data:", err));
-    }
-  }, [axiosSecure, id, user?.email]);
-  console.log(stat);
-
+  
   if (loading) {
     return <div className="text-center py-4">Loading...</div>;
   }
@@ -155,15 +138,7 @@ const RegisteredCamp = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-sm font-medium text-gray-700">
-                    <span
-                      className={`px-2 py-1 rounded-full text-sm font-semibold ${
-                        confirmationStatus === "Confirmed"
-                          ? "bg-green-100 text-green-600"
-                          : "bg-yellow-100 text-yellow-600"
-                      }`}
-                    >
-                      {confirmationStatus}
-                    </span>
+                   {camp.status === 'pending'? <span>{camp.status}</span> : <span>Confirmed</span>}
                   </td>
                   <td className="px-6 py-4 text-sm font-medium text-gray-700">
                     <div className="grid gap-2">

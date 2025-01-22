@@ -50,6 +50,7 @@ const CampDetails = () => {
       campName: camps.name,
       campFees: camps.campFees || camps.price,
       location: camps.location,
+      status:'pending',
     };
 
     try {
