@@ -78,7 +78,7 @@ const CampDetails = () => {
   if (!camps) return <div>Camp not found.</div>;
 
   return (
-    <div className="camp-details w-11/12 mx-auto py-8">
+    <div className="camp-details w-11/12 mx-auto py-24">
       <h2 className="text-3xl font-semibold mb-6 text-center">{camps.name}</h2>
       <div className="camp-detail-card flex flex-col lg:flex-row gap-6">
         {/* Left: Image */}
@@ -91,7 +91,7 @@ const CampDetails = () => {
         </div>
 
         {/* Right: Description */}
-        <div className="lg:w-1/2 flex flex-col justify-center">
+        <div className="lg:w-1/2 flex flex-col justify-center mt-10">
           <p className="text-lg text-gray-700 mb-2">
             <strong>Camp Fees:</strong> ${camps.campFees || camps.price}
           </p>
@@ -113,7 +113,7 @@ const CampDetails = () => {
             <strong>Description:</strong> {camps.description}
           </p>
           <button
-            className="btn btn-primary hover:bg-primary-focus mt-4"
+            className="btn btn-block text-white bg-[#2B4D86] hover:bg-blue-800 mt-4"
             onClick={() => setShowModal(true)}
           >
             Join Camp
@@ -247,12 +247,12 @@ const CampDetails = () => {
 
                 {/* Submit and Cancel Buttons */}
                 <div className="flex flex-col gap-4">
-                  <button type="submit" className="btn btn-primary w-full">
+                  <button type="submit" className="btn btn-block text-white bg-[#2B4D86] hover:bg-blue-600">
                     Submit
                   </button>
                   <button
                     type="button"
-                    className="btn btn-secondary w-full"
+                    className="btn btn-block text-white bg-rose-700 hover:bg-rose-500"
                     onClick={() => setShowModal(false)}
                   >
                     Cancel

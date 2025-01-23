@@ -34,7 +34,7 @@ const AddCamp = () => {
       // Send camp data to the server
       const response = await axiosSecure.post("/camp", campItem);
 
-      if (response.data.insertedId) {
+     
         reset();
         Swal.fire({
           position: "top-end",
@@ -43,7 +43,7 @@ const AddCamp = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-      }
+      
     }
   };
 

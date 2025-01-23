@@ -1,32 +1,39 @@
+
 import React, { useState, useEffect } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { Link } from "react-router-dom";
 import useStatus from "../../Hooks/useStatus";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Feedback from "./Feedback";
+
 
 const RegisteredCamp = () => {
-
-  const [participantData, setParticipantData] = useState(null);
+  const [participantData, setParticipantData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useAuth();
   const [pay] = useStatus([]);
   const axiosSecure = useAxiosSecure();
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+  const [totalPages, setTotalPages] = useState(0);
 
   // Fetch participant data
   useEffect(() => {
     const fetchParticipantData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
-          `https://medicamp-server-side.vercel.app/participants/${user?.email}`
+          `https://medicamp-server-side.vercel.app/participants/${user?.email}?page=${currentPage}&limit=${itemsPerPage}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        setParticipantData(data);
+        setParticipantData(data.results);
+        setTotalPages(Math.ceil(data.total / itemsPerPage));
       } catch (err) {
         setError(err.message);
       } finally {
@@ -34,10 +41,11 @@ const RegisteredCamp = () => {
       }
     };
 
-    fetchParticipantData();
-  }, [user?.email]);
+    if (user?.email) {
+      fetchParticipantData();
+    }
+  }, [user?.email, currentPage, itemsPerPage]);
 
-  
   if (loading) {
     return <div className="text-center py-4">Loading...</div>;
   }
@@ -46,7 +54,7 @@ const RegisteredCamp = () => {
     return <div className="text-center py-4 text-red-500">Error: {error}</div>;
   }
 
-  if (!participantData || participantData.length === 0) {
+  if (participantData.length === 0) {
     return (
       <div className="text-center py-4 text-gray-500">
         No participant found with this email.
@@ -85,24 +93,16 @@ const RegisteredCamp = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h2 className="text-3xl font-semibold text-center mb-6">
-        Registered Camps
-      </h2>
+      <h2 className="text-3xl font-semibold text-center mb-6">Registered Camps</h2>
       <div className="overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200">
         <table className="min-w-full bg-white">
           <thead>
             <tr className="text-white bg-[#2B4D86]">
               <th className="px-6 py-3 text-left text-sm font-medium">Camp Name</th>
               <th className="px-6 py-3 text-left text-sm font-medium">Camp Fees</th>
-              <th className="px-6 py-3 text-left text-sm font-medium">
-                Participant Name
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-medium">
-                Payment Status
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-medium">
-                Payment Confirmation Status
-              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium">Participant Name</th>
+              <th className="px-6 py-3 text-left text-sm font-medium">Payment Status</th>
+              <th className="px-6 py-3 text-left text-sm font-medium">Payment Confirmation</th>
               <th className="px-6 py-3 text-left text-sm font-medium">Action</th>
             </tr>
           </thead>
@@ -110,22 +110,12 @@ const RegisteredCamp = () => {
             {participantData.map((camp, index) => {
               const payment = pay.find((p) => p.cartIds.includes(camp._id));
               const paymentStatus = payment ? payment.status : "Unpaid";
-              // const confirmationStatus =
-              //   payment?.confirmationStatus === "Paid"
-              //     ? "Confirmed"
-              //     : "Pending";
 
               return (
                 <tr key={index} className="border-b hover:bg-gray-50">
-                  <td className="px-6 py-4 text-sm font-medium text-gray-700">
-                    {camp.campName}
-                  </td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-700">
-                    ${camp.campFees}
-                  </td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-700">
-                    {camp.name}
-                  </td>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-700">{camp.campName}</td>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-700">${camp.campFees}</td>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-700">{camp.name}</td>
                   <td className="px-6 py-4 text-sm font-medium text-gray-700">
                     <span
                       className={`px-2 py-1 rounded-full text-sm font-semibold ${
@@ -138,7 +128,7 @@ const RegisteredCamp = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-sm font-medium text-gray-700">
-                   {camp.status === 'pending'? <span>{camp.status}</span> : <span>Confirmed</span>}
+                    {camp.status === "pending" ? <span>{camp.status}</span> : <span>Confirmed</span>}
                   </td>
                   <td className="px-6 py-4 text-sm font-medium text-gray-700">
                     <div className="grid gap-2">
@@ -165,11 +155,11 @@ const RegisteredCamp = () => {
                           >
                             Paid
                           </button>
-                          <Link to="/dashboard/feedback">
+                      
                             <button className="ml-3 bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500">
-                              Feedback
+                              <Feedback id={camp._id}></Feedback>
                             </button>
-                          </Link>
+                        
                         </>
                       )}
                     </div>
@@ -179,6 +169,26 @@ const RegisteredCamp = () => {
             })}
           </tbody>
         </table>
+      </div>
+
+      <div className="flex justify-between mt-4">
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
