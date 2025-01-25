@@ -31,6 +31,14 @@ const FeedbackSection = () => {
           {testimonial.map((test, index) => (
             <SwiperSlide key={index}>
               <div className="mx-24 my-16 flex flex-col items-center">
+                {/* User Image */}
+                <img 
+                  src={test.image} 
+                  alt={test.name} 
+                  className="w-24 h-24 rounded-full object-cover mb-4" 
+                />
+                {/* User Name */}
+                <p className="text-xl font-semibold text-gray-800 mb-2">{test.name}</p>
                 {/* Star Rating */}
                 <Rating
                   style={{ maxWidth: 180 }}

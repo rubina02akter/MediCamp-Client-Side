@@ -16,6 +16,7 @@ const useCamp = () => {
     queryKey: ["camp"],
     queryFn: async () => {
       const res = await axiosPublic.get("/camp");
+      console.log(res.data);
       return res.data;
     },
   });

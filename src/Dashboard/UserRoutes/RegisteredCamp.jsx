@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { Link } from "react-router-dom";
@@ -7,33 +6,28 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Feedback from "./Feedback";
 
-
 const RegisteredCamp = () => {
-  const [participantData, setParticipantData] = useState([]);
+
+  const [participantData, setParticipantData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useAuth();
   const [pay] = useStatus([]);
   const axiosSecure = useAxiosSecure();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5);
-  const [totalPages, setTotalPages] = useState(0);
 
   // Fetch participant data
   useEffect(() => {
     const fetchParticipantData = async () => {
-      setLoading(true);
       try {
         const response = await fetch(
-          `https://medicamp-server-side.vercel.app/participants/${user?.email}?page=${currentPage}&limit=${itemsPerPage}`
+          `https://medicamp-server-side.vercel.app/participants/${user?.email}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        setParticipantData(data.results);
-        setTotalPages(Math.ceil(data.total / itemsPerPage));
+        setParticipantData(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -41,11 +35,10 @@ const RegisteredCamp = () => {
       }
     };
 
-    if (user?.email) {
-      fetchParticipantData();
-    }
-  }, [user?.email, currentPage, itemsPerPage]);
+    fetchParticipantData();
+  }, [user?.email]);
 
+  
   if (loading) {
     return <div className="text-center py-4">Loading...</div>;
   }
@@ -54,7 +47,7 @@ const RegisteredCamp = () => {
     return <div className="text-center py-4 text-red-500">Error: {error}</div>;
   }
 
-  if (participantData.length === 0) {
+  if (!participantData || participantData.length === 0) {
     return (
       <div className="text-center py-4 text-gray-500">
         No participant found with this email.
@@ -93,9 +86,11 @@ const RegisteredCamp = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h2 className="text-3xl font-semibold text-center mb-6">Registered Camps</h2>
+      <h2 className="text-3xl font-semibold text-center mb-6">
+        Registered Camps
+      </h2>
       <div className="overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200">
-        <table className="min-w-full bg-white">
+      <table className="min-w-full bg-white">
           <thead>
             <tr className="text-white bg-[#2B4D86]">
               <th className="px-6 py-3 text-left text-sm font-medium">Camp Name</th>
@@ -159,6 +154,7 @@ const RegisteredCamp = () => {
                             <button className="ml-3 bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500">
                               <Feedback id={camp._id}></Feedback>
                             </button>
+                            
                         
                         </>
                       )}
@@ -169,26 +165,6 @@ const RegisteredCamp = () => {
             })}
           </tbody>
         </table>
-      </div>
-
-      <div className="flex justify-between mt-4">
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span>
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
       </div>
     </div>
   );

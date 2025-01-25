@@ -14,7 +14,9 @@ const Feedback = ({ id }) => {
   const feedbackData = {
     feedback: feedback,
     rating: rating,
-    prevId: id
+    prevId: id,
+    name: user.displayName,
+    image:user.photoURL
   }
     try {
       axiosSecure.post('/feedback',feedbackData)
