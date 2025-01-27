@@ -150,6 +150,14 @@ const RegisteredCamp = () => {
                           >
                             Paid
                           </button>
+
+                          <button
+                            onClick={() => handleDeleteUser(camp._id)}
+                           disabled
+                            className="ml-3 bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+                          >
+                            Cancel
+                          </button>
                       
                             <button className="ml-3 bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500">
                               <Feedback id={camp._id}></Feedback>

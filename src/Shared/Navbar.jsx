@@ -103,61 +103,7 @@ const Navbar = () => {
         <div className="text-xl font-bold">MediCamp</div>
         <ul className="hidden lg:flex gap-8">{links}</ul>
 
-        {/* <div>
-          {user ? (
-            <div className="dropdown dropdown-end z-50">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div
-                  title={user?.displayName || "User"}
-                  className="w-10 rounded-full tooltip"
-                  data-tip={user?.displayName}
-                >
-                  <img
-                    referrerPolicy="no-referrer"
-                    alt="User Profile Photo"
-                    src={user?.photoURL || userImg}
-                  />
-                </div>
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-blue-900 rounded-box md:w-52 w-32 text-xs"
-              >
-                <li className="mt-2">
-                  <button
-                    onClick={handleSignOut}
-                    className="bg-blue-400 block text-center"
-                  >
-                    Logout
-                  </button>
-                </li>
-                <li className="mt-2">
-                  <button
-                    className="bg-blue-400 block text-center"
-                  >
-                    <Link to='/dashboard'>Dashboard</Link>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <div className="rounded-full flex items-center gap-2">
-              <img
-                src={userImg}
-                alt="user"
-                className=" w-10 h-10 rounded-full"
-              />
-              <Link className="btn btn-outline mr-2" to="/login">
-                Join Us
-              </Link>
-            </div>
-          )}
-        </div> */}
-
+        
     <div className="flex gap-2">
     <div>
           {user ? (
@@ -181,19 +127,19 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-blue-900 rounded-box md:w-52 w-32 text-xs"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-blue-500 rounded-box md:w-52 w-32 text-xs"
               >
                 <li className="mt-2">
                   <button
                     onClick={handleSignOut}
-                    className="bg-blue-400 block text-center"
+                    className="bg-white text-blue-900 block text-center"
                   >
                     Logout
                   </button>
                 </li>
                 <li className="mt-2">
                   <button
-                    className="bg-blue-400 block text-center"
+                    className="bg-white text-blue-900 block text-center"
                   >
                     <Link to='/dashboard'>Dashboard</Link>
                   </button>

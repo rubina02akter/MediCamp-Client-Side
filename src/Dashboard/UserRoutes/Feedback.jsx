@@ -72,14 +72,14 @@ const Feedback = ({ id }) => {
               ></textarea>
             </div>
             <div>
-              <button type="submit" className="btn btn-success w-full">
+              <button type="submit" className="btn btn-success text-white w-full">
                 Submit Feedback
               </button>
             </div>
           </form>
           <div className="modal-action">
             <form method="dialog">
-              <button className="btn">Close</button>
+              <button className="btn bg-rose-800 text-white">Close</button>
             </form>
           </div>
         </div>
