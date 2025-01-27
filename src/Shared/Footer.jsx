@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { FaFacebook, FaTwitter, FaGithub, FaInstagram } from "react-icons/fa";
-import footerImg from "../../src/assets/images/different-people-doing-volunteer-work.jpg";
-import footerInfoImg from "../../src/assets/images/doctor-patient-ophthalmologist-s-office.jpg";
-import bg from "../../src/assets/images/medical-assistant-helping-patient-with-physiotherapy-exercises.jpg";
+import footerImg from "../../src/assets/images/4790263_49081.jpg";
+import footerInfoImg from "../../src/assets/images/5604927_57035.jpg";
+import bg from "../../src/assets/images/medical-assistant-analyzing-documents-files-monitor-night-nurse-looking-computer-working-healthcare-appointment-with-checkup-papers-doing-overtime-work-desk.jpg";
+import Newsletter from "./Newsletter";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -22,7 +23,7 @@ const Footer = () => {
         className="relative bg-cover bg-center py-16 text-white"
         style={{ backgroundImage: `url(${bg})` }}
       >
-        <div className="absolute inset-0 bg-black opacity-60"></div>
+        <div className="absolute inset-0 bg-black opacity-70"></div>
 
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start w-11/12 mx-auto gap-8 relative">
           
@@ -33,10 +34,11 @@ const Footer = () => {
               alt="Footer Logo"
               className="w-32 md:w-48 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300"
             />
-            <div className="text-lg font-bold">Medical camps</div>
+            <div className="text-lg font-bold">Medi-Camps</div>
             <p className="text-sm max-w-md mx-auto lg:mx-0">
-              Empowering communities through volunteerism and impactful projects. Join us to make a difference.
-            </p>
+  Stay informed about the latest medical camps and volunteer opportunities. Subscribe to our newsletter and help make a difference in communities.
+</p>
+
           </div>
 
           {/* Navigation Links */}
@@ -55,6 +57,7 @@ const Footer = () => {
               <a className="link link-hover block mb-2 hover:text-blue-500">Jobs</a>
               <a className="link link-hover block mb-2 hover:text-blue-500">Press Kit</a>
             </nav>
+          
             <nav>
               <h6 className="text-lg font-semibold mb-4">Legal</h6>
               <a className="link link-hover block mb-2 hover:text-blue-500">Terms of Use</a>
@@ -91,10 +94,11 @@ const Footer = () => {
 
         {/* Footer Bottom Section */}
         <div className="relative mt-12">
+        <Newsletter></Newsletter>
           <div className="w-10/12 mx-auto border-b border-white opacity-30"></div>
           <div className="text-center p-4 mt-4">
             <p className="text-xs md:text-sm font-light opacity-80">
-              Copyright © {new Date().getFullYear()} - All rights reserved by Camps Industries Ltd
+              Copyright © {new Date().getFullYear()} - All rights reserved by MediCamps Industries Ltd
             </p>
           </div>
           <div className="w-10/12 mx-auto border-b border-white opacity-30"></div>

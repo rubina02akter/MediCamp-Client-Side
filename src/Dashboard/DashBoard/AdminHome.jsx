@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-import bg from "../../assets/images/medical-assistant-helping-patient-with-physiotherapy-exercises.jpg"
+import bg from "../../assets/images/Hexagon.svg"
 
 const AdminHome = () => {
   const { user } = useAuth();
@@ -37,7 +37,7 @@ const AdminHome = () => {
 
             <Link
               to="/dashboard/update-profile"
-              className="btn text-white bg-[#2B4C86] mt-4 w-full rounded-none "
+              className="btn text-white bg-[#2B4C86] mt-4 w-full rounded-md "
             >
               Edit Profile
             </Link>

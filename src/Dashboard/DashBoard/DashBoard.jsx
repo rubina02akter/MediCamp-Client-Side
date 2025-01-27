@@ -2,11 +2,13 @@ import { FaBars, FaAddressBook, FaCircle,  FaHome, FaList, FaUsers, FaUtensils, 
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
 import { useState } from "react";
+import useAuth from "../../Hooks/useAuth";
 
 const Dashboard = () => {
   // TODO: get admin from the database
   const [isAdmin] = useAdmin();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const {user} = useAuth();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -48,7 +50,7 @@ const Dashboard = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/dashboard/analytics">
+                <NavLink to={`/dashboard/participants/${user?.email}`}>
                   <FaHome></FaHome>Analytics
                 </NavLink>
               </li>
@@ -130,7 +132,7 @@ const Dashboard = () => {
             ) : (
               <>
                 <li>
-                  <NavLink to="/dashboard/analytics">
+                  <NavLink to={`/dashboard/participants/${user?.email}`}>
                     <FaHome></FaHome>Analytics
                   </NavLink>
                 </li>

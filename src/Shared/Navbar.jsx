@@ -4,9 +4,10 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
 import userImg from "../../src/assets/icons/icons8-user-96.png";
-import { FaShoppingCart } from "react-icons/fa";
+
 import { AuthContext } from "../Providers/AuthProvider";
 import useAdmin from "../Hooks/useAdmin";
+
 // import useCart from "../../../Hooks/useCart";
 
 
@@ -16,6 +17,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   // const [cart] = useCart();
   const [isAdmin] = useAdmin();
+
 
   const handleSignOut = () => {
     logOut()
@@ -88,7 +90,7 @@ const Navbar = () => {
         user && isAdmin && <li><Link to='/dashboard/adminHome'>Dashboard</Link></li>
       }
       {
-        user && !isAdmin && <li><Link to='/dashboard/analytics'>Dashboard</Link></li>
+        user && !isAdmin && <li><Link to={`/dashboard/participants/${user?.email}`}>Dashboard</Link></li>
       }
 
      

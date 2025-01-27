@@ -43,7 +43,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/camp/:campId',
-        element: <CampDetails></CampDetails>,
+        element:<PrivateRoute><CampDetails></CampDetails></PrivateRoute>
        
       },
       {
@@ -98,7 +98,7 @@ const router = createBrowserRouter([
       },
       //user routes
       {
-        path: 'analytics',
+        path: 'participants/:email',
         element:<Analytics></Analytics>
       },
       {
