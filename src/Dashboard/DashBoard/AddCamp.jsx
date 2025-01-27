@@ -3,7 +3,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-
+import { Helmet } from "react-helmet";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
@@ -48,6 +48,12 @@ const AddCamp = () => {
   };
 
   return (
+    <>
+     <Helmet>
+    <title>AddCamp|MediCamp</title>
+    <meta name="description" content="Helmet application"></meta>
+  </Helmet>
+    
     <div className="w-11/12 mx-auto">
       <h2 className="text-3xl font-bold text-center my-6">Add A Camp</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -145,6 +151,7 @@ const AddCamp = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

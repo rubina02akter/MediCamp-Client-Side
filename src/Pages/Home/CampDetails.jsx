@@ -79,7 +79,7 @@ const CampDetails = () => {
 
   return (
     <div className="camp-details w-11/12 mx-auto py-24">
-      <h2 className="text-3xl font-semibold mb-6 text-center">{camps.name}</h2>
+     
       <div className="camp-detail-card flex flex-col lg:flex-row gap-6">
         {/* Left: Image */}
         <div className="lg:w-1/2">
@@ -92,6 +92,9 @@ const CampDetails = () => {
 
         {/* Right: Description */}
         <div className="lg:w-1/2 flex flex-col justify-center mt-10">
+        <p className="text-lg text-gray-700 mb-2">
+        <strong>Camp Name: {camps.name}</strong>
+        </p>
           <p className="text-lg text-gray-700 mb-2">
             <strong>Camp Fees:</strong> ${camps.campFees || camps.price}
           </p>

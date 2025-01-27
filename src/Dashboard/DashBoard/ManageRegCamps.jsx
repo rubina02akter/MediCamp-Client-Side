@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const ManageRegCamps = () => {
   const [payData, setPayData] = useState([]);
@@ -90,6 +91,10 @@ const ManageRegCamps = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
+    <>
+    <Helmet>  <title>Manage Reg-Camps|MediCamp</title>
+    <meta name="description" content="Helmet application"></meta></Helmet>
+  
     <div className="mb-12">
       <table className="table-auto w-full border-collapse border border-gray-300">
         <thead className="bg-gray-100">
@@ -151,6 +156,7 @@ const ManageRegCamps = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

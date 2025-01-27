@@ -8,10 +8,9 @@ Develop a Medical Camp Management System (MCMS) using the MERN stack. This syste
 ## Website Details
 - **Website Name**: Medical Camp Management System
 - **Organizer's Credentials**:
-  - Username: admin@admin.com
-  - Password: AAaa11!!
-
-  - 2nd admin : rubinash@gmail.com
+- admin: medicamp@gmail.com
+- pass: AAaa11!!
+  - admin : rubinash@gmail.com
   - password : Aa1!aa
 - **Live Site URL**: https://medicamp-f955a.web.app/
 

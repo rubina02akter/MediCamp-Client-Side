@@ -53,7 +53,7 @@ const SignUp = () => {
   return (
     <>
  
-      <div className="flex justify-center">
+      <div className="flex justify-center flex-col md:flex-row w-11/12 mx-auto my-12">
         <div>
           <LottieSignUp></LottieSignUp>
         </div>
@@ -153,7 +153,7 @@ const SignUp = () => {
           <div className="flex flex-col justify-center items-center">
             <SocialLogIn></SocialLogIn>
             <p className="p-6">
-              Already have an account{" "}
+              Already have an account?{" "}
               <Link to="/login" className="text-green-900 underline">
                 Login
               </Link>

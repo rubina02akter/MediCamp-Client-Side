@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { FaFacebook, FaTwitter, FaGithub, FaInstagram } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const Contact = () => {
   const form = useRef(); // Reference to the form element
@@ -35,14 +36,20 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-[#2B4E86] min-h-screen text-white py-24 px-10 flex flex-col-reverse lg:flex-row justify-between items-center">
+    <>
+    <Helmet>
+    <title>Contact|MediCamp</title>
+    <meta name="description" content="Helmet application"></meta>
+    </Helmet>
+
+    <div className="bg-[#EBF3FE] min-h-screen text-[#5d8ddb] py-24 px-10 flex flex-col-reverse lg:flex-row justify-between items-center">
       {/* Left Section: Contact Info */}
       <div className="lg:w-1/3 space-y-6">
         <h2 className="text-2xl font-semibold mb-6">CONTACT INFO</h2>
         <div className="space-y-4">
           {/* Email */}
           <div className="flex items-center space-x-4">
-            <div className="bg-gray-800 p-3 rounded-full">
+            <div className="bg-white p-3 rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -64,7 +71,7 @@ const Contact = () => {
           </div>
           {/* Phone */}
           <div className="flex items-center space-x-4">
-            <div className="bg-gray-800 p-3 rounded-full">
+            <div className="bg-white p-3 rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -86,7 +93,7 @@ const Contact = () => {
           </div>
           {/* Location */}
           <div className="flex items-center space-x-4">
-            <div className="bg-gray-800 p-3 rounded-full">
+            <div className="bg-white p-3 rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -176,6 +183,7 @@ const Contact = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

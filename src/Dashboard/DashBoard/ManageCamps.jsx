@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const ManageItems = () => {
   const [camps, setCamps] = useState([]); // Initialize camps state
@@ -57,7 +58,13 @@ const ManageItems = () => {
   };
 
   return (
-    <div className="my-12">
+    <>
+    <Helmet>
+    <title>Manage Camps|MediCamp</title>
+    <meta name="description" content="Helmet application"></meta>
+    </Helmet>
+  
+    <div className="py-12">
       <div className="overflow-x-auto">
         <table className="table w-full">
           {/* Table head */}
@@ -68,14 +75,14 @@ const ManageItems = () => {
               <th>Camp Name</th>
               <th>Camp Fees</th>
               <th>Update</th>
-              <th>Delete</th>
+              <th>Remove</th>
             </tr>
           </thead>
           {/* Table body */}
           <tbody>
             {camps.map((item, index) => (
               <tr key={item._id}>
-                <td>{index + 1}</td>
+                <td>{index + 1}.</td>
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
@@ -108,6 +115,7 @@ const ManageItems = () => {
         </table>
       </div>
     </div>
+    </>
   );
 };
 

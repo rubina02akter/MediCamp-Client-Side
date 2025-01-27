@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"; // To access the email from the route
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
 
@@ -47,12 +48,17 @@ const Analytics = () => {
   }, [email, axiosSecure]);
 
   return (
-    <div className="px-6 py-12">
+    <>
+   <Helmet>
+   <title>Analytics|MediCamp</title>
+   <meta name="description" content="Helmet application"></meta>
+   </Helmet>
+    <div className="px-6 py-12 bg-blue-50 min-h-screen">
       <h1 className="text-3xl font-bold text-center mb-6 text-blue-800">
-        Analytics for {email}
+        Analytics for : {email}
       </h1>
       <p className="text-center text-gray-700 mb-8">
-        Visualizing registered camps and associated fees for {email}.
+        Visualizing registered camps and associated fees for <span className="text-xl font-bold">{email}</span>.
       </p>
 
       <div className="bg-white shadow-md rounded-lg p-6 max-w-4xl mx-auto">
@@ -83,6 +89,7 @@ const Analytics = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

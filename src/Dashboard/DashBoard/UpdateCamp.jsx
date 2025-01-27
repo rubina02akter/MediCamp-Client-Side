@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useParams, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -93,6 +94,12 @@ const UpdateCamp = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
+    <>
+    <Helmet>
+    <title>Update Camps|MediCamp</title>
+    <meta name="description" content="Helmet application"></meta>
+    </Helmet>
+  
     <div className="w-11/12 mx-auto">
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -211,6 +218,7 @@ const UpdateCamp = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

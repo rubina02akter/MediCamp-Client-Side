@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import bg from "../../assets/images/Hexagon.svg"
+import { Helmet } from "react-helmet";
 
 const AdminHome = () => {
   const { user } = useAuth();
 
   return (
     <div>
-      <div className="h-[500px] text-center text-white ">
+      <Helmet>
+      <title>AdminHome|MediCamp</title>
+      <meta name="description" content="Helmet application"></meta>
+      </Helmet>
+      <div className="h-[500px] text-center text-white bg-blue-50 min-h-screen">
         {/* Cover Section */}
         <div className="relative">
           <img

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useCamp from "../../Hooks/useCamp";
 import PopularCamps from "../Home/PopularCamps";
 import SearchBar from "../../components/SearchBar";
+import { Helmet } from "react-helmet";
 
 const AllCamps = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -9,12 +10,18 @@ const AllCamps = () => {
   const [camp] = useCamp();
 
   // Filter camps based on the search query
-  const filteredCamps = camp.filter((c) =>
-    Object.values(c)
-      .join(" ") // Join all field values into a single string
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase())
-  );
+  const filteredCamps = camp.filter((c) => {
+    const campName = c.name?.toLowerCase() || "";
+    const campDate = c.date?.toLowerCase() || ""; // Assuming date is a string
+    const healthcareProfession = c.profession?.toLowerCase() || "";
+
+    // Check if the search query matches any of the fields
+    return (
+      campName.includes(searchQuery.toLowerCase()) ||
+      campDate.includes(searchQuery.toLowerCase()) ||
+      healthcareProfession.includes(searchQuery.toLowerCase())
+    );
+  });
 
   // Sort camps based on the selected criteria
   const sortedCamps = [...filteredCamps].sort((a, b) => {
@@ -30,11 +37,15 @@ const AllCamps = () => {
     }
   });
 
-   
-
   return (
-    <div>
-      <div className="w-11/12 mx-auto pt-24">
+    <>
+    <Helmet>
+    <title>Available Camps|MediCamp</title>
+    <meta name="description" content="Helmet application"></meta>
+    </Helmet>
+ 
+    <div className="mb-12">
+      <div className="w-11/12 mx-auto pt-24 ">
         {/* Search Bar */}
         <SearchBar
           placeholder="Search by Camp Name, Date, or Professional Name"
@@ -59,6 +70,7 @@ const AllCamps = () => {
       {/* Display Popular Camps */}
       <PopularCamps camps={sortedCamps} />
     </div>
+    </>
   );
 };
 

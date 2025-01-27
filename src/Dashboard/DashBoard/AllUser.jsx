@@ -3,6 +3,7 @@ import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const AllUser = () => {
   const axiosSecure = useAxiosSecure();
@@ -67,6 +68,10 @@ const AllUser = () => {
 
   return (
     <div>
+      <Helmet>
+      <title>All Users|MediCamp</title>
+      <meta name="description" content="Helmet application"></meta>
+      </Helmet>
       <div className="flex justify-evenly my-4">
         <h2 className="text-3xl">All Users</h2>
         <h2 className="text-3xl">Total Users: {users.totalCount}</h2>
@@ -85,7 +90,7 @@ const AllUser = () => {
           <tbody>
             {users.data.map((user, index) => (
               <tr key={user._id}>
-                <th>{(currentPage - 1) * itemsPerPage + index + 1}</th>
+                <th>{(currentPage - 1) * itemsPerPage + index + 1}.</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
@@ -117,7 +122,7 @@ const AllUser = () => {
             <button
               key={page}
               className={`btn mx-1 ${
-                currentPage === page + 1 ? "btn-primary" : "btn-outline"
+                currentPage === page + 1 ? "bg-[#2B4D86] btn text-white" : "btn-outline"
               }`}
               onClick={() => handlePageChange(page + 1)}
             >

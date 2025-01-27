@@ -5,6 +5,7 @@ import useStatus from "../../Hooks/useStatus";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Feedback from "./Feedback";
+import { Helmet } from "react-helmet";
 
 const RegisteredCamp = () => {
 
@@ -85,7 +86,12 @@ const RegisteredCamp = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <>
+    <Helmet>
+    <title>Registered Camps|MediCamp</title>
+    <meta name="description" content="Helmet application"></meta>
+    </Helmet>
+    <div className="max-w-7xl mx-auto p-6 bg-blue-50">
       <h2 className="text-3xl font-semibold text-center mb-6">
         Registered Camps
       </h2>
@@ -93,6 +99,7 @@ const RegisteredCamp = () => {
       <table className="min-w-full bg-white">
           <thead>
             <tr className="text-white bg-[#2B4D86]">
+              <th className="px-6 py-3 text-left text-sm font-medium">#</th>
               <th className="px-6 py-3 text-left text-sm font-medium">Camp Name</th>
               <th className="px-6 py-3 text-left text-sm font-medium">Camp Fees</th>
               <th className="px-6 py-3 text-left text-sm font-medium">Participant Name</th>
@@ -108,6 +115,8 @@ const RegisteredCamp = () => {
 
               return (
                 <tr key={index} className="border-b hover:bg-gray-50">
+
+                  <td className="px-6 py-4 text-sm font-medium text-gray-700">{index+1}.</td>
                   <td className="px-6 py-4 text-sm font-medium text-gray-700">{camp.campName}</td>
                   <td className="px-6 py-4 text-sm font-medium text-gray-700">${camp.campFees}</td>
                   <td className="px-6 py-4 text-sm font-medium text-gray-700">{camp.name}</td>
@@ -122,8 +131,8 @@ const RegisteredCamp = () => {
                       {paymentStatus}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-700">
-                    {camp.status === "pending" ? <span>{camp.status}</span> : <span>Confirmed</span>}
+                  <td className="px-6 py-4 text-sm font-bold text-red-500">
+                    {camp.status === "pending" ? <span>{camp.status}</span> : <span className="text-green-800 font-bold p-2 bg-green-200 rounded-2xl">Confirmed</span>}
                   </td>
                   <td className="px-6 py-4 text-sm font-medium text-gray-700">
                     <div className="grid gap-2">
@@ -175,6 +184,7 @@ const RegisteredCamp = () => {
         </table>
       </div>
     </div>
+    </>
   );
 };
 

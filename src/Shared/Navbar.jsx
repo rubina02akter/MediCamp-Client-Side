@@ -7,6 +7,7 @@ import userImg from "../../src/assets/icons/icons8-user-96.png";
 
 import { AuthContext } from "../Providers/AuthProvider";
 import useAdmin from "../Hooks/useAdmin";
+import { FaUserMd } from "react-icons/fa";
 
 // import useCart from "../../../Hooks/useCart";
 
@@ -100,7 +101,11 @@ const Navbar = () => {
   return (
     <nav className="text-white fixed w-full z-50 bg-opacity-40 bg-[#152c54]">
       <div className="container mx-auto flex justify-between items-center p-4">
-        <div className="text-xl font-bold">MediCamp</div>
+        <div className="text-xl font-bold flex items-center">
+          <p><FaUserMd className="text-blue-900 text-3xl mx-auto mr-1" /></p>
+          <p>Medi<span className="text-blue-900">Camp</span></p>
+          
+          </div>
         <ul className="hidden lg:flex gap-8">{links}</ul>
 
         
@@ -129,6 +134,7 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-blue-500 rounded-box md:w-52 w-32 text-xs"
               >
+                <li className="text-center font-extrabold underline">{user.displayName}</li>
                 <li className="mt-2">
                   <button
                     onClick={handleSignOut}

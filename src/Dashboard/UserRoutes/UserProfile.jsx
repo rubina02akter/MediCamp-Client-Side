@@ -1,13 +1,20 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-import bg from "../../assets/images/different-people-doing-volunteer-work.jpg";
+import bg from "../../assets/images/Hexagon.svg";
+import { Helmet } from "react-helmet";
 
 const UserProfile = () => { 
   const { user } = useAuth();
 
   return (
-    <div>
-    <div className="h-[500px] text-center text-white ">
+    <>
+    <Helmet>
+    <title>Participants Profile|MediCamp</title>
+    <meta name="description" content="Helmet application"></meta>
+    </Helmet>
+    
+    <div className=" bg-blue-50 min-h-screen">
+    <div className="h-[500px] text-center">
       {/* Cover Section */}
       <div className="relative">
         <img
@@ -37,7 +44,7 @@ const UserProfile = () => {
 
           <Link
             to="/dashboard/update-user-profile"
-            className="btn  bg-[#2B4C86] mt-4 w-full rounded-none text-white"
+            className="btn  bg-[#2B4C86] mt-4 w-full rounded-md text-white"
           >
             Edit Profile
           </Link>
@@ -45,6 +52,7 @@ const UserProfile = () => {
       </div>
     </div>
   </div>
+  </>
   );
 };
 
