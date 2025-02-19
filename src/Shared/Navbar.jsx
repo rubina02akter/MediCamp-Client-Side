@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { FiMenu, FiX, FiHome, FiLogOut } from "react-icons/fi";
+import React, { useContext, useEffect, useState } from "react";
+import { FiMenu, FiX, FiHome, FiLogOut ,FiSun, FiMoon} from "react-icons/fi";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
@@ -17,7 +17,19 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   // const [cart] = useCart();
-  const [isAdmin] = useAdmin();
+   const [isAdmin] = useAdmin();
+  // const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+ 
+
+
+  // useEffect(() => {
+  //   document.documentElement.setAttribute("data-theme", theme);
+  //   localStorage.setItem("theme", theme);
+  // }, [theme]);
+
+  // const toggleTheme = () => {
+  //   setTheme(theme === "light" ? "dark" : "light");
+  // };
 
 
   const handleSignOut = () => {
@@ -99,6 +111,7 @@ const Navbar = () => {
   );
 
   return (
+    //{`${theme? "text-black" : "text-white"}`}
     <nav className="text-white fixed w-full z-50 bg-opacity-40 bg-[#152c54]">
       <div className="container mx-auto flex justify-between items-center p-4">
         <div className="text-xl font-bold flex items-center">
@@ -108,7 +121,10 @@ const Navbar = () => {
           </div>
         <ul className="hidden lg:flex gap-8">{links}</ul>
 
-        
+        {/* <button onClick={toggleTheme} className="text-xl">
+            {theme === "light" ? <FiMoon /> : <FiSun />}
+          </button>
+           */}
     <div className="flex gap-2">
     <div>
           {user ? (

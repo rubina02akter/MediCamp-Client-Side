@@ -1,14 +1,14 @@
-import { Button } from "daisyui";
+
 import { FaHeartbeat, FaUserMd, FaClipboardList, FaArrowCircleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Section = () => {
   return (
     <div>
-      <section className="bg-gradient-to-r from-blue-100 to-blue-50 py-16 px-6 md:px-12">
+      <section className="bg-[#EBF3FE] py-6 px-6 md:px-12">
       <div className="max-w-6xl mx-auto text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-[#2B4E86] mb-6">
-          Welcome to Medical Camp Management System
+        <h1 className="text-3xl md:text-4xl font-bold text-black mb-6">
+          -- Welcome to Medical Camp Management System --
         </h1>
         <p className="text-gray-700 text-lg md:text-xl mb-8">
           A seamless platform for managing and coordinating medical camps. Whether you're an organizer or a participant, we've got you covered with the best tools for efficient camp management.

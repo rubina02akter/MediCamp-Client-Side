@@ -22,6 +22,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
+  // const [theme, setTheme] = useState("light");
   
  
 
@@ -65,6 +66,16 @@ const AuthProvider = ({ children }) => {
   });
  }
 
+ //theme 
+//  const handleTheme = (e) => {
+//   if (e.target.checked) {
+//     setTheme("dark");
+//     // console.log(e.target.value)
+//   } else {
+//     setTheme("light");
+//   }
+// };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -105,6 +116,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     googleSignIn,editProfile,
     emails, setEmails,
+    // theme, setTheme,handleTheme
  
   };
   return (

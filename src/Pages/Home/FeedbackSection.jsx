@@ -18,10 +18,10 @@ const FeedbackSection = () => {
   }, [axiosSecure, setTestimonial]);
 
   return (
-    <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#EBF3FE] py-12 px-4 sm:px-6 lg:px-8 border-2 border-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-extrabold text-gray-900 text-center">
-          What Our Users Say
+         -- What Our Users Say --
         </h2>
         <p className="mt-4 text-lg text-gray-600 text-center">
           Feedback from our valued users about their experiences.
@@ -46,7 +46,7 @@ const FeedbackSection = () => {
                   readOnly
                 />
                 {/* Feedback Text */}
-                <p className="py-8 text-gray-700 text-center font-medium">
+                <p className="py-8  bg-[#2B4F86] text-white rounded-xl p-2 m-2 text-center font-medium">
                   "{test.feedback}"
                 </p>
               </div>
